@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: continuumio/miniconda3:4.4.10
+From: continuumio/miniconda:latest
 
 %labels
     AUTHOR wckdouglas@gmail.com
