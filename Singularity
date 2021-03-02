@@ -13,5 +13,5 @@ From: continuumio/miniconda:latest
     export PATH=/opt/conda/bin:$PATH
     conda config --add channels defaults
     conda config --add channels bioconda
-    conda install --yes lima pbmm2 pbccs
+    conda install --yes lima=2.0.0 pbmm2=1.4.0 pbccs=6.0.0
     conda clean --index-cache --tarballs --packages --yes

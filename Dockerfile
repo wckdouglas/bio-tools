@@ -3,6 +3,6 @@ FROM continuumio/miniconda:latest
 env PATH /opt/conda/bin:$PATH
 RUN conda config --add channels defaults
 RUN conda config --add channels bioconda
-RUN conda install --yes lima pbmm2 pbccs
+RUN conda install --yes lima=2.0.0 pbmm2=1.4.0 pbccs=6.0.0
 RUN conda clean --index-cache --tarballs --packages --yes
 
