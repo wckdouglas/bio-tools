@@ -39,7 +39,7 @@ jobs:
         file: ./Dockerfile
         builder: ${{ steps.buildx.outputs.name }}
         push: true
-        tags:  ${{ secrets.DOCKER_HUB_USERNAME }}/smrt-tools:latest
+        tags:  ${{ secrets.DOCKER_HUB_USERNAME }}/bio-tools:latest
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
 
