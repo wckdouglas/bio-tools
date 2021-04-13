@@ -46,5 +46,5 @@ jobs:
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
 
-    - name: Test doimage
+    - name: Test docker image
       run: docker run ${{ secrets.DOCKER_HUB_USERNAME }}/smrt-tools:latest ccs
