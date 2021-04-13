@@ -42,5 +42,9 @@ jobs:
         tags:  ${{ secrets.DOCKER_HUB_USERNAME }}/smrt-tools:latest
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
+
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
+
+    - name: Test doimage
+      run: docker run ${{ secrets.DOCKER_HUB_USERNAME }}/smrt-tools:latest ccs
