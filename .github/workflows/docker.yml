@@ -1,7 +1,5 @@
 name: Push and publish to Docker Hub
-on:
-  push:
-    branches: [ main ]
+on: [push, pull_request]
 
 
 jobs:
