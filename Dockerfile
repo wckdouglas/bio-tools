@@ -10,7 +10,7 @@ RUN mamba install -c bioconda --yes \
         lima=2.0.0 pbmm2=1.4.0 \
         pbccs=6.0.0 whatshap=1.1 \
         octopus bowtie2 hisat2 bwa cutadapt atropos \
-        bedtools samtools=1.12 bedtools \
+        bedtools samtools bedtools \
         picard fastqc seqkit seqtk datamash  && \
     conda clean --index-cache --tarballs --packages --yes
 
