@@ -1,7 +1,7 @@
 FROM continuumio/miniconda:latest
 
 RUN conda config --add channels defaults && \
-     conda config --add channels bioconda && \
+    conda config --add channels bioconda && \
     conda config --add channels conda-forge && \
     conda install python=3 && \
     conda install -c conda-forge mamba
@@ -12,7 +12,7 @@ RUN mamba install -c bioconda --yes \
         octopus bowtie2 hisat2 bwa cutadapt atropos \
         bedtools samtools bedtools \
         picard fastqc seqkit seqtk datamash  && \
-        pbmarkdup
+        pbmarkdup &&\
     conda clean --index-cache --tarballs --packages --yes
 
 ENV PATH /opt/conda/bin:$PATH
