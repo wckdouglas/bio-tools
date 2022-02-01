@@ -12,6 +12,7 @@ RUN mamba install -c bioconda --yes \
         octopus bowtie2 hisat2 bwa cutadapt atropos \
         bedtools samtools bedtools \
         picard fastqc seqkit seqtk datamash  && \
+        pbmarkdup
     conda clean --index-cache --tarballs --packages --yes
 
 ENV PATH /opt/conda/bin:$PATH
