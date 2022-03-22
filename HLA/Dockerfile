@@ -8,6 +8,8 @@ ENV samtools_version 1.9
 ENV bwa_version 0.7.17
 ENV picard_version 1.123
 ENV bamtools_version 2.5.1
+ENV mummer_version=4.0.0rc1
+
 
 # run update and install necessary tools ubuntu tools
 RUN apt-get update -y && \
@@ -45,6 +47,15 @@ RUN cd /usr/local/bin/samtools-${samtools_version}/ && ./configure
 RUN cd /usr/local/bin/samtools-${samtools_version}/ && make
 RUN cd /usr/local/bin/samtools-${samtools_version}/ && make install
 
+# instsall mummer
+WORKDIR /usr/local/bin
+RUN wget https://github.com/mummer4/mummer/releases/download/v${mummer_version}/mummer-${mummer_version}.tar.gz 
+RUN tar zxvf mummer-${mummer_version}.tar.gz 
+WORKDIR mummer-${mummer_version} 
+RUN ./configure --prefix=/usr/local
+RUN make  && make install CPPFLAGS="-O3 -DSIXTYFOURBITS"
+RUN rm -rf /usr/local/bin/mummer-${mummer_version} mummer-${mummer_version}.tar.gz 
+
 # install picard
 WORKDIR /usr/local/bin
 RUN wget https://github.com/broadinstitute/picard/releases/download/${picard_version}/picard-tools-${picard_version}.zip
@@ -71,7 +82,7 @@ RUN mkdir -p /usr/local/bin/bamtools-${bamtools_version}/build
 WORKDIR /usr/local/bin/bamtools-${bamtools_version}/build
 RUN cmake -DCMAKE_INSTALL_PREFIX=/usr/local/bin/bamtools-${bamtools_version} ..
 RUN make
-RUN make install
+RUN make install 
 
 # install hla*la
 RUN mkdir -p /opt/HLA-LA/bin
@@ -93,6 +104,7 @@ RUN make all BOOST_PATH=/usr/include/boost BAMTOOLS_PATH=/usr/local/bin/bamtools
 RUN sed -i 's@samtools_bin=@samtools_bin=/usr/local/bin/samtools@' paths.ini
 RUN sed -i 's@bwa_bin=@bwa_bin=/usr/local/bin/bwa@' paths.ini
 RUN sed -i 's@picard_sam2fastq_bin=.*@picard_sam2fastq_bin=/usr/local/bin/picard/SamToFastq.jar@' paths.ini
+RUN sed -i 's@nucmer_bin=.*@nucmer_bin=/usr/local/bin/nucmer@' paths.ini
 
 #perl module
 RUN apt-get install -y 
@@ -105,6 +117,7 @@ RUN perl INSTALL.pl && \
 
 # some final cleanup and command
 FROM build as hla
+ENV LD_LIBRARY_PATH="/usr/local/lib:${LD_LIBRARY_PATH}"
 ENV PATH="/usr/local/bin/:${PATH}"
 ENV PATH="/opt/HLA-LA/bin/:${PATH}"
 ENV PATH="/opt/HLA-LA/src/:${PATH}"
