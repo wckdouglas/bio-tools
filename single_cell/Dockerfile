@@ -8,9 +8,10 @@ RUN conda install -c conda-forge mamba
 
 FROM base as conda
 RUN mamba install -c bioconda -c conda-forge --yes \
-    scanpy=1.3.7 jupyterlab jupyter pandas numpy seaborn scipy \
+    jupyterlab jupyter pandas numpy seaborn scipy \
     scvi-tools=0.14.5 bustools=0.41.0 kallisto=0.48.0 dask mpire \
     && conda clean --index-cache --tarballs --packages --yes
+RUN pip install scanpy 
 
 FROM conda as final
 ENV PATH /opt/conda/bin:$PATH
