@@ -10,6 +10,9 @@ jobs:
   build:
     timeout-minutes: 20
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        subdir: ["single_cell", "graph_genome"]
     permissions:
       contents: read
       packages: write
@@ -39,24 +42,13 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Build graph genome
+      - name: Build ${{ matrix.subdir }}
         uses: docker/build-push-action@v2
         with:
-          context: ./graph_genome
+          context: ./${{ matrix.subdir }}
           file: ./Dockerfile
           platforms: linux/amd64
           push: true
           tags: |
-            ${{ env.IMAGE_NAME }}/gg:${{ github.sha }}
-            ${{ env.IMAGE_NAME }}/gg:latest
-
-      - name: Build single cell
-        uses: docker/build-push-action@v2
-        with:
-          context: ./single_cell
-          file: ./Dockerfile
-          platforms: linux/amd64
-          push: true
-          tags: |
-            ${{ env.IMAGE_NAME }}/sc:${{ github.sha }}
-            ${{ env.IMAGE_NAME }}/sc:latest
+            ${{ env.IMAGE_NAME }}/${{ matrix.subdir }}:${{ github.sha }}
+            ${{ env.IMAGE_NAME }}/${{ matrix.subdir }}:latest
