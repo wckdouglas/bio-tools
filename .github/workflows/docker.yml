@@ -36,4 +36,5 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
+            ghcr.io/${{ env.IMAGE_NAME_BASE }}/${{ matrix.subdir }}:${{ github.sha }}
             ghcr.io/${{ env.IMAGE_NAME_BASE }}/${{ matrix.subdir }}:latest
