@@ -38,3 +38,14 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Build graph genome
+        uses: docker/build-push-action@v2
+        with:
+          context: ./graph_genome
+          file: ./Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: |
+            repo/gg:${{ github.sha }}
+            repo/gg:latest
