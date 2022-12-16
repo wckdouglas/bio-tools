@@ -7,13 +7,8 @@ RUN conda config --add channels defaults && \
 RUN conda install -c conda-forge mamba
 
 FROM base as conda
-RUN mamba install -c bioconda --yes \
-        lima=2.0.0 pbmm2\
-        pbccs=6.0.0 \
-        octopus bowtie2 hisat2 bwa cutadapt atropos \
-        bedtools samtools pbsv hifiasm \
-        pbmarkdup tabix bcftools actc \
-        picard fastqc seqkit seqtk datamash &&\
+COPY package-list.txt .
+RUN mamba install -c bioconda --yes  --file package-list.txt &&
     conda clean --index-cache --tarballs --packages --yes
 
 FROM conda as exec
