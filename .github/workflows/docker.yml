@@ -47,5 +47,16 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            repo/gg:${{ github.sha }}
-            repo/gg:latest
+            ${{ env.IMAGE_NAME }}/gg:${{ github.sha }}
+            ${{ env.IMAGE_NAME }}/gg:latest
+
+      - name: Build single cell
+        uses: docker/build-push-action@v2
+        with:
+          context: ./single_cell
+          file: ./Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ${{ env.IMAGE_NAME }}/sc:${{ github.sha }}
+            ${{ env.IMAGE_NAME }}/sc:latest
