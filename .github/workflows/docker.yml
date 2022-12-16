@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tool_group: ["single_cell", "graph_genome", "biotools", "hla"]
+        tool_group: ["single_cell", "graph_genome", "biotools", "hla", "assemble"]
     permissions:
       contents: read
       packages: write

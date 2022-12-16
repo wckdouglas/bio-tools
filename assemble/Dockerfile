@@ -10,7 +10,6 @@ RUN git clone https://github.com/AntonBankevich/LJA.git
 
 FROM cmake AS lja_build
 WORKDIR /opt/LJA 
-RUN   cmake . && \
-    make
+RUN cmake . && make
 
 ENV PATH /opt/LJA/bin:$PATH
