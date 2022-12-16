@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME_BASE: ${{ github.repository }}
 
 
 jobs:
@@ -36,4 +36,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/${{ matrix.subdir }}:latest
+            ghcr.io/${{ env.IMAGE_NAME_BASE }}/${{ matrix.subdir }}:latest
