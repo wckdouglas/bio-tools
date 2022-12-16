@@ -8,7 +8,7 @@ RUN conda install -c conda-forge mamba
 
 FROM base as conda
 COPY package-list.txt .
-RUN mamba install -c bioconda --yes  --file package-list.txt &&
+RUN mamba install -c bioconda --yes  --file package-list.txt && \
     conda clean --index-cache --tarballs --packages --yes
 
 FROM conda as exec
