@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        subdir: ["single_cell", "graph_genome", "biotools", "hla"]
+        tool_group: ["single_cell", "graph_genome", "biotools", "hla"]
     permissions:
       contents: read
       packages: write
@@ -28,13 +28,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build ${{ matrix.subdir }}
+      - name: Build ${{ matrix.tool_group }}
         uses: docker/build-push-action@v2
         with:
-          context: ./${{ matrix.subdir }}
-          file: ./${{ matrix.subdir }}/Dockerfile
+          context: ./${{ matrix.tool_group }}
+          file: ./${{ matrix.tool_group }}/Dockerfile
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/${{ env.IMAGE_NAME_BASE }}/${{ matrix.subdir }}:${{ github.sha }}
-            ghcr.io/${{ env.IMAGE_NAME_BASE }}/${{ matrix.subdir }}:latest
+            ghcr.io/${{ env.IMAGE_NAME_BASE }}/${{ matrix.tool_group }}:${{ github.sha }}
+            ghcr.io/${{ env.IMAGE_NAME_BASE }}/${{ matrix.tool_group }}:latest
