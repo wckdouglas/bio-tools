@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        subdir: ["single_cell", "graph_genome"]
+        subdir: ["single_cell", "graph_genome", "biotools"]
     permissions:
       contents: read
       packages: write
