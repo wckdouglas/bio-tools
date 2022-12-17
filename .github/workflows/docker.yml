@@ -33,7 +33,7 @@ jobs:
         uses: tj-actions/changed-files@v34
         with:
           files: |
-            ${{ matrix.docker }}/**
+            ${{ matrix.docker }}/Dockerfile
 
       - name: Build ${{ matrix.docker }}
         uses: docker/build-push-action@v2
