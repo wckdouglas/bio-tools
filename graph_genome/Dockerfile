@@ -8,7 +8,7 @@ RUN conda install -c conda-forge mamba
 
 FROM base as conda
 RUN mamba install -c bioconda --yes \
-    vg graphaligner gfatools &&\
+    vg graphaligner gfatools samtools &&\
     conda clean --index-cache --tarballs --packages --yes
 
 FROM conda as final
