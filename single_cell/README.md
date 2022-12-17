@@ -1,5 +1,7 @@
 # jupyter lab
 
+Launching jupyter lab from within the container and port forwarding to local:
+
 ```sh
 docker run \
   -p 1234:1234 \
