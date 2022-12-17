@@ -9,7 +9,7 @@ RUN conda install -c conda-forge mamba
 FROM base as conda
 RUN mamba install -c bioconda -c conda-forge --yes \
     jupyterlab jupyter pandas numpy seaborn scipy \
-    pysam intervaltree \
+    pysam intervaltree pydantic \
     scvi-tools=0.14.5 bustools=0.41.0 kallisto=0.48.0 dask mpire \
     && conda clean --index-cache --tarballs --packages --yes
 RUN pip install scanpy 
