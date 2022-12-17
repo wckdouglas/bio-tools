@@ -28,8 +28,16 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Get changed files in the ${{ matrix.tool_group }} folder
+        id: changed-files-specific
+        uses: tj-actions/changed-files@v34
+        with:
+          files: |
+            ${{ matrix.tool_group }}/**
+
       - name: Build ${{ matrix.tool_group }}
         uses: docker/build-push-action@v2
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
         with:
           context: ./${{ matrix.tool_group }}
           file: ./${{ matrix.tool_group }}/Dockerfile
