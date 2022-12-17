@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tool_group: ["single_cell", "graph_genome", "biotools", "hla", "assemble"]
+        docker: ["single_cell", "graph_genome", "biotools", "hla", "assemble"]
     permissions:
       contents: read
       packages: write
@@ -28,21 +28,21 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get changed files in the ${{ matrix.tool_group }} folder
+      - name: Get changed files in the ${{ matrix.docker }} folder
         id: changed-files-specific
         uses: tj-actions/changed-files@v34
         with:
           files: |
-            ${{ matrix.tool_group }}/**
+            ${{ matrix.docker }}/**
 
-      - name: Build ${{ matrix.tool_group }}
+      - name: Build ${{ matrix.docker }}
         uses: docker/build-push-action@v2
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         with:
-          context: ./${{ matrix.tool_group }}
-          file: ./${{ matrix.tool_group }}/Dockerfile
+          context: ./${{ matrix.docker }}
+          file: ./${{ matrix.docker }}/Dockerfile
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/${{ env.IMAGE_NAME_BASE }}/${{ matrix.tool_group }}:${{ github.sha }}
-            ghcr.io/${{ env.IMAGE_NAME_BASE }}/${{ matrix.tool_group }}:latest
+            ghcr.io/${{ env.IMAGE_NAME_BASE }}/${{ matrix.docker }}:${{ github.sha }}
+            ghcr.io/${{ env.IMAGE_NAME_BASE }}/${{ matrix.docker }}:latest
