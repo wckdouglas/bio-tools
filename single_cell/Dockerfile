@@ -10,7 +10,7 @@ FROM base as conda
 RUN mamba install -c bioconda -c conda-forge --yes \
     jupyterlab jupyter pandas numpy seaborn scipy \
     pysam intervaltree pydantic \
-    bustools=0.41.0 kallisto=0.48.0 kb-python dask mpire \
+    kb-python dask mpire \
     && conda clean --index-cache --tarballs --packages --yes
 RUN pip install scanpy && pip install scvi-tools
 
