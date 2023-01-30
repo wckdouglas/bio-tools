@@ -5,6 +5,10 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME_BASE: ${{ github.repository }}
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 
 jobs:
   build:
