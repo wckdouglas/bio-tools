@@ -15,6 +15,7 @@ RUN mamba install -c bioconda --yes \
     kallisto \
     && conda clean --index-cache --tarballs --packages --yes
 
+# build a few custom rust tools
 FROM rust:1.67-slim-buster as rust 
 RUN apt-get update \
     && apt-get upgrade -y \
@@ -34,7 +35,6 @@ WORKDIR fq-filter-reads-0.1.0
 RUN cargo install --path .
 
 
-    
 
 FROM conda as exec
 COPY --from=rust /usr/local/cargo/bin/fq-filter-reads /usr/local/bin/fq-filter-reads 
