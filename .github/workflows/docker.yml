@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        docker: ["single_cell", "graph_genome", "biotools", "hla", "assemble"]
+        docker: ["single_cell", "graph_genome", "biotools", "hla", "assemble", "rna-seq"]
     permissions:
       contents: read
       packages: write
