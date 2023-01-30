@@ -18,7 +18,7 @@ RUN mamba install -c bioconda --yes \
 FROM rust:1.67-slim-buster as rust 
 RUN apt-get update \
     && apt-get upgrade -y \
-    && apt-get install -y wget unzip \
+    && apt-get install -y wget unzip perl cmake \
     && rm -rf /var/lib/apt/lists/* 
 WORKDIR /opt/work
 RUN wget https://github.com/wckdouglas/filter-clipped/archive/refs/tags/v0.3.0.zip 
@@ -37,6 +37,6 @@ RUN cargo install --path .
     
 
 FROM conda as exec
-COPY --from=rust /usr/local/cargo/bin/fq-filter-reads /usr/local/cargo/bin/fq-filter-reads 
-COPY --from=rust /usr/local/cargo/bin/filter-clipped /usr/local/cargo/bin/filter-clipped
-ENV PATH /usr/local/cargo/bin:/opt/conda/bin:$PATH
+COPY --from=rust /usr/local/cargo/bin/fq-filter-reads /usr/local/bin/fq-filter-reads 
+COPY --from=rust /usr/local/cargo/bin/filter-clipped /usr/local/bin/filter-clipped
+ENV PATH /usr/local/bin:/opt/conda/bin:$PATH
