@@ -12,7 +12,7 @@ RUN mamba install -c bioconda --yes \
     bwa cutadapt \
     bedtools samtools tabix \
     picard fastqc seqkit seqtk datamash \
-    kallisto \
+    kallisto fastp atropos \
     && conda clean --index-cache --tarballs --packages --yes
 
 # build a few custom rust tools
