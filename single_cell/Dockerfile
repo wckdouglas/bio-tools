@@ -16,8 +16,8 @@ ARG MAMBA_DOCKERFILE_ACTIVATE
 RUN python  -m pip install --upgrade pip setuptools wheel \
     && pip install matplotlib==3.6.2 \
     && pip install scanpy==1.9.1 \
-    && pip install scvi-tools=0.19.0 \
-    && pip install scvi=0.6.8 
+    && pip install scvi-tools==0.19.0 \
+    && pip install scvi==0.6.8 
 
 FROM scrna as final
 ARG MAMBA_DOCKERFILE_ACTIVATE
