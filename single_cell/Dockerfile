@@ -3,7 +3,7 @@ ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
 RUN micromamba install -y -n base \
     -c bioconda -c conda-forge \
-    python=3.9 \
+    python=3.6 \
     jupyterlab jupyter pandas numpy seaborn scipy \
     pysam intervaltree pydantic \
     kb-python dask mpire scikit-misc\
