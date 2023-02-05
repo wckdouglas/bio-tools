@@ -1,12 +1,11 @@
 FROM mambaorg/micromamba:0.19.1 as base
 
-RUN micromamba config --add channels defaults && \
-    micromamba config --add channels bioconda && \
-    micromamba config --add channels conda-forge && \
-    micromamba install python=3.9
+COPY --chown=$MAMBA_USER:$MAMBA_USER env.yaml /tmp/env.yaml
+RUN micromamba install -y -n base -f /tmp/env.yaml && \
+    micromamba clean --all --yes
 
-FROM base as conda
-RUN micromamba install  --yes \
+RUN micromamba install -c bioconda -c conda-forge --yes \
+    python=3.9 \
     jupyterlab jupyter pandas numpy seaborn scipy \
     pysam intervaltree pydantic \
     kb-python dask mpire scikit-misc\
@@ -15,5 +14,5 @@ RUN micromamba install  --yes \
     && pip install scanpy \
     && pip install scvi-tools 
 
-FROM conda as final
+FROM base as final
 ENV PATH /opt/conda/bin:$PATH
