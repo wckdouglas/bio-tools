@@ -10,9 +10,9 @@ FROM base as conda
 RUN mamba install -c bioconda -c conda-forge --yes \
     jupyterlab jupyter pandas numpy seaborn scipy \
     pysam intervaltree pydantic \
-    kb-python dask mpire \
+    kb-python dask mpire scikit-misc\
     && conda clean --index-cache --tarballs --packages --yes
-RUN pip install scanpy && pip install scvi-tools && pip install skmisc
+RUN pip install scanpy && pip install scvi-tools 
 
 FROM conda as final
 ENV PATH /opt/conda/bin:$PATH
