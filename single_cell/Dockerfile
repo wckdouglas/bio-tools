@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:0.19.1 as base
+FROM mambaorg/micromamba:jammy-cuda-11.7.1 as base
 ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
 RUN micromamba install -y -n base \
@@ -7,7 +7,7 @@ RUN micromamba install -y -n base \
     pysam intervaltree pydantic \
     kb-python dask scikit-misc \
     mpire scvi-tools==0.19.0 \
-    cuda-toolkit pytorch-cuda=11.7 \
+    pytorch-cuda=11.7 \
     && micromamba clean --all --yes
 # these have to be pip install, for the latest versions
 
