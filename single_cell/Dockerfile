@@ -13,10 +13,10 @@ RUN micromamba install -y -n base \
 FROM base as scrna
 ARG MAMBA_DOCKERFILE_ACTIVATE
 RUN python  -m pip install --upgrade pip setuptools wheel \
-    && pip install matplotlib \
-    && pip install 'scanpy[leiden]' \
+    && pip install matplotlib==3.6.2 \
+    && pip install scanpy==1.9.2 \
     && pip install scvi-tools  \
-    && pip install scvi  \
+    && pip install scvi==0.19.0 \
     && pip install mpire
 
 FROM scrna as final
