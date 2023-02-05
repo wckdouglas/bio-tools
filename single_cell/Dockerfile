@@ -10,6 +10,7 @@ RUN micromamba install -y -n base \
     pytorch-cuda=11.7 \
     scanpy=1.9.1 \
     leidenalg \
+    cudatoolkit \
     && micromamba clean --all --yes
 
 FROM base as final
