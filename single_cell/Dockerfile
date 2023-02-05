@@ -12,7 +12,7 @@ RUN mamba install -c bioconda -c conda-forge --yes \
     pysam intervaltree pydantic \
     kb-python dask mpire \
     && conda clean --index-cache --tarballs --packages --yes
-RUN pip install scanpy && pip install scvi-tools
+RUN pip install scanpy && pip install scvi-tools && pip install skmisc
 
 FROM conda as final
 ENV PATH /opt/conda/bin:$PATH
