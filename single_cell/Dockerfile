@@ -10,7 +10,7 @@ RUN micromamba install -y -n base \
     && conda clean --index-cache --tarballs --packages --yes \
     && pip install matplotlib=3.0.3 \
     && pip install scanpy \
-    && pip install scvi-tools  \
+    && pip install scvi-tools\
     && micromamba clean --all --yes
 
 FROM base as final
