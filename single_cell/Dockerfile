@@ -12,6 +12,7 @@ RUN micromamba install -y -n base \
 # these have to be pip install, for the latest versions
 
 FROM base as scrna
+ARG MAMBA_DOCKERFILE_ACTIVATE
 RUN pip install scanpy \
     && pip install scvi-tools  \
     && pip install scvi 
