@@ -50,3 +50,5 @@ jobs:
           tags: |
             ghcr.io/${{ env.IMAGE_NAME_BASE }}/${{ matrix.docker }}:${{ github.sha }}
             ghcr.io/${{ env.IMAGE_NAME_BASE }}/${{ matrix.docker }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
