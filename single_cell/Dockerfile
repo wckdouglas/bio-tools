@@ -12,7 +12,8 @@ RUN micromamba install -y -n base \
 
 FROM base as scrna
 ARG MAMBA_DOCKERFILE_ACTIVATE
-RUN pip install matplotlib==3.0.3 \
+RUN python  -m pip install --upgrade pip setuptools wheel \
+    && pip install matplotlib==3.0.3 \
     && pip install 'scanpy[leiden]' \
     && pip install scvi-tools  \
     && pip install scvi  \
