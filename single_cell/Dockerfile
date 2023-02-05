@@ -6,11 +6,9 @@ RUN micromamba install -y -n base \
     python=3.9 jupyterlab jupyter pandas numpy seaborn scipy \
     pysam intervaltree pydantic \
     kb-python dask scikit-misc \
-    mpire scvi-tools==0.19.0 \
-    pytorch-cuda=11.7 \
-    scanpy=1.9.1 \
-    leidenalg \
-    cudatoolkit \
+    mpire pytorch-cuda=11.7 scanpy=1.9.1 \
+    leidenalg cudatoolkit \
+    && micromamba install -y -c conda-forge scvi-tools==0.19.0 \
     && micromamba clean --all --yes
 
 FROM base as final
