@@ -8,15 +8,9 @@ RUN micromamba install -y -n base \
     kb-python dask scikit-misc \
     mpire scvi-tools==0.19.0 \
     pytorch-cuda=11.7 \
+    scanpy=1.9.1 \
     && micromamba clean --all --yes
-# these have to be pip install, for the latest versions
 
-FROM base as scrna
-ARG MAMBA_DOCKERFILE_ACTIVATE
-RUN python  -m pip install --upgrade pip setuptools wheel \
-    && pip install matplotlib==3.6.2 \
-    && pip install scanpy==1.9.1 
-
-FROM scrna as final
+FROM base as final
 ARG MAMBA_DOCKERFILE_ACTIVATE
 ENV PATH /opt/conda/bin:$PATH
