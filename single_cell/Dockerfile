@@ -8,7 +8,6 @@ RUN micromamba install -y -n base \
     pysam intervaltree pydantic \
     kb-python dask mpire scikit-misc\
     scanpy scvi-tools scvi \
-    && conda clean --index-cache --tarballs --packages --yes \
     && micromamba clean --all --yes
 
 FROM base as final
