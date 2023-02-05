@@ -7,10 +7,11 @@ RUN micromamba install -y -n base \
     jupyterlab jupyter pandas numpy seaborn scipy \
     pysam intervaltree pydantic \
     kb-python dask mpire scikit-misc\
-    && pip install scanpy \
-    && pip install scvi-tools  \
-    && pip install scvi \
     && micromamba clean --all --yes
+# these have to be pip install, for the latest versions
+RUN pip install scanpy \
+    && pip install scvi-tools  \
+    && pip install scvi 
 
 FROM base as final
 ARG MAMBA_DOCKERFILE_ACTIVATE
