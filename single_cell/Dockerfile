@@ -7,7 +7,7 @@ RUN micromamba install -y -n base \
     jupyterlab jupyter pandas numpy seaborn scipy \
     pysam intervaltree pydantic \
     kb-python dask scikit-misc \
-    mpire scvi-tools==0.19.0 \
+    mpire scvi-tools==0.19.0 pytorch-cuda=11.7 \
     && micromamba clean --all --yes
 # these have to be pip install, for the latest versions
 
