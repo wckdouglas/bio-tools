@@ -9,6 +9,7 @@ RUN micromamba install -y -n base \
     mpire scvi-tools==0.19.0 \
     pytorch-cuda=11.7 \
     scanpy=1.9.1 \
+    leidenalg \
     && micromamba clean --all --yes
 
 FROM base as final
