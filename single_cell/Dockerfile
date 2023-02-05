@@ -1,12 +1,12 @@
 FROM mambaorg/micromamba:0.19.1 as base
 
-RUN mamba config --add channels defaults && \
-    mamba config --add channels bioconda && \
-    mamba config --add channels conda-forge && \
-    mamba install python=3.9
+RUN micromamba config --add channels defaults && \
+    micromamba config --add channels bioconda && \
+    micromamba config --add channels conda-forge && \
+    micromamba install python=3.9
 
 FROM base as conda
-RUN mamba install  --yes \
+RUN micromamba install  --yes \
     jupyterlab jupyter pandas numpy seaborn scipy \
     pysam intervaltree pydantic \
     kb-python dask mpire scikit-misc\
