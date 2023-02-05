@@ -11,11 +11,11 @@ RUN micromamba install -y -n base \
     && micromamba clean --all --yes
 # these have to be pip install, for the latest versions
 
-FROM base as scRNA
+FROM base as scrna
 RUN pip install scanpy \
     && pip install scvi-tools  \
     && pip install scvi 
 
-FROM scRNA as final
+FROM scrna as final
 ARG MAMBA_DOCKERFILE_ACTIVATE
 ENV PATH /opt/conda/bin:$PATH
