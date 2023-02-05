@@ -7,12 +7,15 @@ RUN micromamba install -y -n base \
     jupyterlab jupyter pandas numpy seaborn scipy \
     pysam intervaltree pydantic \
     kb-python dask mpire scikit-misc\
+    matplotlib=3.0.3 \
     && micromamba clean --all --yes
 # these have to be pip install, for the latest versions
+
+FROM base as scRNA
 RUN pip install scanpy \
     && pip install scvi-tools  \
     && pip install scvi 
 
-FROM base as final
+FROM scRNA as final
 ARG MAMBA_DOCKERFILE_ACTIVATE
 ENV PATH /opt/conda/bin:$PATH
