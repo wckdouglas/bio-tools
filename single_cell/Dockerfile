@@ -7,12 +7,12 @@ RUN conda config --add channels defaults && \
 RUN conda install -c conda-forge mamba
 
 FROM base as conda
-RUN pip install matplotlib=3.0.3 
 RUN mamba install -c bioconda -c conda-forge --yes \
     jupyterlab jupyter pandas numpy seaborn scipy \
     pysam intervaltree pydantic \
     kb-python dask mpire scikit-misc\
     && conda clean --index-cache --tarballs --packages --yes
+RUN pip install matplotlib=3.0.3 
 RUN pip install scanpy && pip install scvi-tools 
 
 FROM conda as final
