@@ -1,13 +1,12 @@
-FROM continuumio/miniconda3:latest as base
+FROM mambaorg/micromamba:0.19.1 as base
 
-RUN conda config --add channels defaults && \
-    conda config --add channels bioconda && \
-    conda config --add channels conda-forge && \
-    conda install python=3.9
-RUN conda install -c conda-forge mamba
+RUN mamba config --add channels defaults && \
+    mamba config --add channels bioconda && \
+    mamba config --add channels conda-forge && \
+    mamba install python=3.9
 
 FROM base as conda
-RUN mamba install -c bioconda -c conda-forge --yes \
+RUN mamba install  --yes \
     jupyterlab jupyter pandas numpy seaborn scipy \
     pysam intervaltree pydantic \
     kb-python dask mpire scikit-misc\
