@@ -4,7 +4,7 @@ ARG MAMBA_DOCKERFILE_ACTIVATE=1
 RUN micromamba install -y -n base \
     -c bioconda -c conda-forge -c pytorch -c nvidia \
     python=3.9 jupyterlab jupyter pandas numpy seaborn scipy \
-    pysam intervaltree pydantic scirpy matplotlib<3.7.0\
+    pysam intervaltree pydantic scirpy matplotlib<3.7.0 \
     kb-python dask scikit-misc \
     pbpigeon=1.0.0 pbmm2=1.10.0 isoseq3=3.8.2 \
     mpire pytorch-cuda=11.7 scanpy=1.9.1 \
